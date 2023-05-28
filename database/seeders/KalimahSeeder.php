@@ -22,7 +22,7 @@ class KalimahSeeder extends Seeder
         DB::transaction(function () {
             foreach (range(1, 114) as $surah) {
                 try {
-                    $request = Http::get("https://api.quran.com/api/v4/verses/by_chapter/$surah?language=id&words=true&page=1&per_page=300&fields=1");
+                    $request = Http::get("https://api.quran.com/api/v4/verses/by_chapter/$surah?language=id&words=true&page=1&per_page=300&fields=1&word_fields=text_uthmani");
 
                     foreach ($request['verses'] as $verse) {
                         foreach ($verse['words'] as $word) {

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('char_type_name', ['word', 'end']);
             $table->unsignedSmallInteger('page_number');
             $table->unsignedTinyInteger('line_number');
-            $table->string('text', 10);
+            $table->string('text', 50);
             $table->timestamps();
 
             $table->foreign('ayah_id')

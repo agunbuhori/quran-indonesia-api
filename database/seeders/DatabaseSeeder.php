@@ -13,14 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call(SurahSeeder::class);
-        // $this->call(AyahSeeder::class);
-        // $this->call(KhatTypeSeeder::class);
-        // $this->call(KhatSeeder::class);
-        // $this->call(TranslationVersionSeeder::class);
-        // $this->call(TranslationSeeder::class);
-        // $this->call(TopicSeeder::class);
+        $this->call(SurahSeeder::class);
+        $this->call(AyahSeeder::class);
+        $this->call(KhatTypeSeeder::class);
+        $this->call(KhatSeeder::class);
+        $this->call(TranslationVersionSeeder::class);
+        $this->call(TranslationSeeder::class);
+        $this->call(TopicSeeder::class);
         $this->call(KalimahSeeder::class);
-        // $this->call(TransliterationSeeder::class);
+        $this->call(TransliterationSeeder::class);
     }
 }

@@ -28,6 +28,8 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
     volumes:
       - ./mysql-data:/var/lib/mysql
+    ports:
+    - "${FORWARD_DB_PORT}:3306"
 
   cache:
     image: redis

@@ -42,9 +42,3 @@ cd quran-api-indonesian-complex
 composer install
 
 ```
-
-Configure the environment variables:
-
-Rename the .env.example file to .env.
-Modify the .env file and set your database and Redis connection details.
-Generate an application key:

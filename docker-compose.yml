@@ -7,7 +7,7 @@ services:
     depends_on:
       - app
     ports:
-      - '8080:80'
+      - '${APP_PORT}:80'
     networks:
       - quran_complex
 

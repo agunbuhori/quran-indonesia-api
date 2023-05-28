@@ -26,13 +26,13 @@ class KalimahSeeder extends Seeder
 
                     foreach ($request['verses'] as $verse) {
                         foreach ($verse['words'] as $word) {
-                            $kalimah = Kalimah::where([
+                            $kalimah = Kalimah::create([
                                 'ayah_id' => $verse['id'],
                                 'position' => $word['position'],
-                                // 'char_type_name' => $word['char_type_name'],
-                                // 'page_number' => $word['page_number'],
-                                // 'line_number' => $word['line_number'],
-                                // 'text' => $word['text']
+                                'char_type_name' => $word['char_type_name'],
+                                'page_number' => $word['page_number'],
+                                'line_number' => $word['line_number'],
+                                'text' => $word['text']
                             ])->first();
 
                             if ($word['text_uthmani']) {
@@ -45,18 +45,18 @@ class KalimahSeeder extends Seeder
                                 ]);
                             }
 
-                            // Translation::create([
-                            //     'translation_version_id' => 1,
-                            //     'translatable_id' => $kalimah->id,
-                            //     'translatable_type' => 'App\Models\Kalimah',
-                            //     'text' => $word['translation']['text']
-                            // ]);
+                            Translation::create([
+                                'translation_version_id' => 1,
+                                'translatable_id' => $kalimah->id,
+                                'translatable_type' => 'App\Models\Kalimah',
+                                'text' => $word['translation']['text']
+                            ]);
 
-                            // Transliteration::create([
-                            //     'transliterable_id' => $kalimah->id,
-                            //     'transliterable_type' => 'App\Models\Kalimah',
-                            //     'text' => $word['transliteration']['text']
-                            // ]);
+                            Transliteration::create([
+                                'transliterable_id' => $kalimah->id,
+                                'transliterable_type' => 'App\Models\Kalimah',
+                                'text' => $word['transliteration']['text']
+                            ]);
                         }
                     }
                 } catch (\Throwable $th) {

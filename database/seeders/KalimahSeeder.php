@@ -33,10 +33,24 @@ class KalimahSeeder extends Seeder
                                 'page_number' => $word['page_number'],
                                 'line_number' => $word['line_number'],
                                 'text' => $word['text']
+                            ]);
+                        }
+                    }
+                } catch (\Throwable $th) {
+                    throw $th;
+                }
+
+                try {
+                    $request = Http::get("https://api.quran.com/api/v4/verses/by_chapter/$surah?language=id&words=true&page=1&per_page=300&fields=1&word_fields=text_uthmani");
+
+                    foreach ($request['verses'] as $verse) {
+                        foreach ($verse['words'] as $word) {
+                            $kalimah = Kalimah::where([
+                                'ayah_id' => $verse['id'],
+                                'position' => $word['position'],
                             ])->first();
 
                             if ($word['text_uthmani']) {
-
                                 Khat::create([
                                     'khat_type_id' => 1,
                                     'text' => $word['text_uthmani'],

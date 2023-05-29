@@ -58,4 +58,9 @@ class Ayah extends Model
     {
         return $this->hasMany(Kalimah::class);
     }
+
+    public function surah()
+    {
+        return $this->belongsTo(Surah::class);
+    }
 }

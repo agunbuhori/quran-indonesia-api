@@ -12,8 +12,14 @@ class Translation extends Model
 
     protected $fillable = [
         'translation_version_id',
-        'ayah_id',
+        'translatable_id',
+        'translatable_type',
         'text',
+    ];
+
+    protected $hidden = [
+        'translatable_type',
+        'translatable_id',
     ];
 
     public $timestamps = false;

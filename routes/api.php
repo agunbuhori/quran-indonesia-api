@@ -28,3 +28,4 @@ Route::get('/juz', [SurahController::class, 'juz']);
 Route::get('/juz/{juz}', [SurahController::class, 'show_juz']);
 Route::get('/topic', [TopicController::class, 'index']);
 Route::get('/topic/{topic}', [TopicController::class, 'show']);
+Route::get('/search', [SurahController::class, 'search']);

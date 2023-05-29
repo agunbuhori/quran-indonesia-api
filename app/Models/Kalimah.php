@@ -23,6 +23,7 @@ class Kalimah extends Model
         'text'
     ];
 
+
     /**
      * Indicates if the model should be timestamped.
      *

@@ -10,9 +10,15 @@ class Khat extends Model
     use HasFactory;
 
     protected $fillable = [
-        'ayah_id',
         'khat_type_id',
+        'khatable_id',
+        'khatable_type',
         'text'
+    ];
+
+    protected $hidden = [
+        'khatable_type',
+        'khatable_id',
     ];
 
     public $timestamps = false;

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AyahController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\KhatTypeController;
 use App\Http\Controllers\SurahController;
+use App\Http\Controllers\TafseerController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\TranslationVersionController;
 use Illuminate\Http\Request;
@@ -29,3 +31,8 @@ Route::get('/juz/{juz}', [SurahController::class, 'show_juz']);
 Route::get('/topic', [TopicController::class, 'index']);
 Route::get('/topic/{topic}', [TopicController::class, 'show']);
 Route::get('/search', [SurahController::class, 'search']);
+
+Route::get('/ayah/{surah}/{ayah}', [AyahController::class, 'show']);
+Route::get('/tafseer/{surah}/{ayah}', [TafseerController::class, 'show']);
+
+Route::get('/book', [BookController::class, 'index']);

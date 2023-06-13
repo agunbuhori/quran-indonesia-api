@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAyahRequest;
-use App\Http\Requests\UpdateAyahRequest;
-use App\Http\Resources\AyahsResource;
-use App\Models\Ayah;
+use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
+use App\Http\Resources\BookResource;
+use App\Models\Book;
 
-class AyahController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return BookResource::collection(Book::orderBy('language', 'asc')->get());
     }
 
     /**
@@ -28,7 +28,7 @@ class AyahController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAyahRequest $request)
+    public function store(StoreBookRequest $request)
     {
         //
     }
@@ -36,16 +36,15 @@ class AyahController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($surah, $ayah)
+    public function show(Book $book)
     {
-        $ayah = Ayah::where(['surah_id' => $surah, 'ayah_number' => $ayah])->firstOrFail();
-        return AyahsResource::make($ayah);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ayah $ayah)
+    public function edit(Book $book)
     {
         //
     }
@@ -53,7 +52,7 @@ class AyahController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAyahRequest $request, Ayah $ayah)
+    public function update(UpdateBookRequest $request, Book $book)
     {
         //
     }
@@ -61,7 +60,7 @@ class AyahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ayah $ayah)
+    public function destroy(Book $book)
     {
         //
     }

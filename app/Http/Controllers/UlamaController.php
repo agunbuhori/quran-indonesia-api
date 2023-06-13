@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAyahRequest;
-use App\Http\Requests\UpdateAyahRequest;
-use App\Http\Resources\AyahsResource;
-use App\Models\Ayah;
+use App\Http\Requests\StoreUlamaRequest;
+use App\Http\Requests\UpdateUlamaRequest;
+use App\Models\Ulama;
 
-class AyahController extends Controller
+class UlamaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +27,7 @@ class AyahController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAyahRequest $request)
+    public function store(StoreUlamaRequest $request)
     {
         //
     }
@@ -36,16 +35,15 @@ class AyahController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($surah, $ayah)
+    public function show(Ulama $ulama)
     {
-        $ayah = Ayah::where(['surah_id' => $surah, 'ayah_number' => $ayah])->firstOrFail();
-        return AyahsResource::make($ayah);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ayah $ayah)
+    public function edit(Ulama $ulama)
     {
         //
     }
@@ -53,7 +51,7 @@ class AyahController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAyahRequest $request, Ayah $ayah)
+    public function update(UpdateUlamaRequest $request, Ulama $ulama)
     {
         //
     }
@@ -61,7 +59,7 @@ class AyahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ayah $ayah)
+    public function destroy(Ulama $ulama)
     {
         //
     }

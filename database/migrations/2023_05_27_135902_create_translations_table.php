@@ -17,6 +17,9 @@ return new class extends Migration
             $table->morphs('translatable');
             $table->text('text');
 
+            $table->fullText('text')
+                ->language('indonesian');
+
             $table->foreign('translation_version_id')
                 ->references('id')
                 ->on('translation_versions');

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAyahRequest;
-use App\Http\Requests\UpdateAyahRequest;
-use App\Http\Resources\AyahsResource;
+use App\Http\Requests\StoreTafseerRequest;
+use App\Http\Requests\UpdateTafseerRequest;
+use App\Http\Resources\TafseerResource;
 use App\Models\Ayah;
+use App\Models\Tafseer;
 
-class AyahController extends Controller
+class TafseerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +29,7 @@ class AyahController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAyahRequest $request)
+    public function store(StoreTafseerRequest $request)
     {
         //
     }
@@ -38,14 +39,15 @@ class AyahController extends Controller
      */
     public function show($surah, $ayah)
     {
-        $ayah = Ayah::where(['surah_id' => $surah, 'ayah_number' => $ayah])->firstOrFail();
-        return AyahsResource::make($ayah);
+        $ayah = Ayah::where(['surah_id' => $surah, 'ayah_number' => $ayah])->firstOrfail();
+        $tafseer = Tafseer::where(['ayah_id' => $ayah->id, 'book_id' => request('book_id') ?? 1])->first();
+        return TafseerResource::make($tafseer);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ayah $ayah)
+    public function edit(Tafseer $tafseer)
     {
         //
     }
@@ -53,7 +55,7 @@ class AyahController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAyahRequest $request, Ayah $ayah)
+    public function update(UpdateTafseerRequest $request, Tafseer $tafseer)
     {
         //
     }
@@ -61,7 +63,7 @@ class AyahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ayah $ayah)
+    public function destroy(Tafseer $tafseer)
     {
         //
     }

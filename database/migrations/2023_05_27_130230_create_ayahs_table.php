@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ayahs', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->unsignedTinyInteger('surah_id');
-            $table->unsignedSmallInteger('verse_number');
+            $table->unsignedSmallInteger('ayah_number');
             $table->unsignedTinyInteger('hizb_number');
             $table->unsignedTinyInteger('rub_el_hizb_number');
             $table->unsignedSmallInteger('ruku_number');

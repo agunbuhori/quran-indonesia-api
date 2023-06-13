@@ -26,9 +26,7 @@ class SurahController extends Controller
      */
     public function index()
     {
-        return Cache::remember('surah', now()->addYear(1), function () {
-            return SurahResource::collection(Surah::all());
-        });
+        return SurahResource::collection(Surah::all());
     }
 
     /**
@@ -53,8 +51,8 @@ class SurahController extends Controller
 
                 $juzs[] = [
                     'juz' => $juz,
-                    'ayah_start' => "{$ayahStart->surah_id}:{$ayahStart->verse_number}",
-                    'ayah_end' => "{$ayahEnd->surah_id}:{$ayahEnd->verse_number}",
+                    'ayah_start' => "{$ayahStart->surah_id}:{$ayahStart->ayah_number}",
+                    'ayah_end' => "{$ayahEnd->surah_id}:{$ayahEnd->ayah_number}",
                 ];
             }
 

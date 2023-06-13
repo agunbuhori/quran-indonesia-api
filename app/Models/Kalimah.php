@@ -20,7 +20,10 @@ class Kalimah extends Model
         'char_type_name',
         'page_number',
         'line_number',
-        'text'
+        'text',
+        'text_v2',
+        'text_uthmani',
+        'text_hafs',
     ];
 
 

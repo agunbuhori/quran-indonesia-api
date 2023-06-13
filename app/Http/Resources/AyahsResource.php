@@ -16,16 +16,23 @@ class AyahsResource extends JsonResource
     {
 
         $data = [
-            ...parent::toArray($request),
-            'khat' => $this->khat
+            ...parent::toArray($request)
         ];
 
+        if ($request->with_khat) {
+            $data['khat'] = $this->khat;
+        }
+
         if ($request->with_kalimahs) {
-            $data['kalimahs'] = $this->kalimahs()->with('khat', 'translation')->get();
+            $data['kalimahs'] = $this->kalimahs()->with('translation')->get();
         }
 
         if ($request->with_translation) {
             $data['translation'] = $this->translation;
+        }
+
+        if ($request->with_surah) {
+            $data['surah'] = $this->surah;
         }
 
         return $data;

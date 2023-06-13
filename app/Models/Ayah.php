@@ -20,7 +20,7 @@ class Ayah extends Model
      */
     protected $fillable = [
         'surah_id',
-        'verse_number',
+        'ayah_number',
         'hizb_number',
         'rub_el_hizb_number',
         'ruku_number',

@@ -26,50 +26,14 @@ class KalimahSeeder extends Seeder
 
                     foreach ($request['verses'] as $verse) {
                         foreach ($verse['words'] as $word) {
-                            $kalimah = Kalimah::create([
+                            Kalimah::create([
                                 'ayah_id' => $verse['id'],
                                 'position' => $word['position'],
                                 'char_type_name' => $word['char_type_name'],
                                 'page_number' => $word['page_number'],
                                 'line_number' => $word['line_number'],
-                                'text' => $word['text']
-                            ]);
-                        }
-                    }
-                } catch (\Throwable $th) {
-                    throw $th;
-                }
-
-                try {
-                    $request = Http::get("https://api.quran.com/api/v4/verses/by_chapter/$surah?language=id&words=true&page=1&per_page=300&fields=1&word_fields=text_uthmani");
-
-                    foreach ($request['verses'] as $verse) {
-                        foreach ($verse['words'] as $word) {
-                            $kalimah = Kalimah::where([
-                                'ayah_id' => $verse['id'],
-                                'position' => $word['position'],
-                            ])->first();
-
-                            if ($word['text_uthmani']) {
-                                Khat::create([
-                                    'khat_type_id' => 1,
-                                    'text' => $word['text_uthmani'],
-                                    'khatable_id' => $kalimah->id,
-                                    'khatable_type' => 'App\Models\Kalimah'
-                                ]);
-                            }
-
-                            Translation::create([
-                                'translation_version_id' => 1,
-                                'translatable_id' => $kalimah->id,
-                                'translatable_type' => 'App\Models\Kalimah',
-                                'text' => $word['translation']['text']
-                            ]);
-
-                            Transliteration::create([
-                                'transliterable_id' => $kalimah->id,
-                                'transliterable_type' => 'App\Models\Kalimah',
-                                'text' => $word['transliteration']['text']
+                                'text' => $word['text'],
+                                'text_v2' => $word['text'],
                             ]);
                         }
                     }

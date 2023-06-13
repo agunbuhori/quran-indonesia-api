@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kalimahs', function (Blueprint $table) {
+        Schema::create('tafseers', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedSmallInteger('book_id');
             $table->unsignedSmallInteger('ayah_id');
-            $table->unsignedTinyInteger('position');
-            $table->enum('char_type_name', ['word', 'end']);
-            $table->unsignedSmallInteger('page_number');
-            $table->unsignedTinyInteger('line_number');
-            $table->string('text', 10);
-            $table->string('text_v2', 10);
+            $table->longText('text')
+                ->nullable();
+            $table->text('asbabun_nazal')
+                ->nullable();
+
+
+            $table->foreign('book_id')
+                ->references('id')
+                ->on('books');
 
             $table->foreign('ayah_id')
                 ->references('id')
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kalimahs');
+        Schema::dropIfExists('tafseers');
     }
 };

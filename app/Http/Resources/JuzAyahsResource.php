@@ -20,8 +20,8 @@ class JuzAyahsResource extends JsonResource
 
         return [
             'juz' => $this->resource,
-            'ayah_start' => "{$ayahStart->surah_id}:{$ayahStart->verse_number}",
-            'ayah_end' => "{$ayahEnd->surah_id}:{$ayahEnd->verse_number}",
+            'ayah_start' => "{$ayahStart->surah_id}:{$ayahStart->ayah_number}",
+            'ayah_end' => "{$ayahEnd->surah_id}:{$ayahEnd->ayah_number}",
             'ayahs' => AyahsResource::collection(Ayah::where('juz_number', $this->resource)->simplePaginate($request->per_page ?? 10))
         ];
     }

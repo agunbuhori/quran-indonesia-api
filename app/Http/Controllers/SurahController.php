@@ -73,14 +73,37 @@ class SurahController extends Controller
      */
     public function search(SearchAyahRequest $request)
     {
-        $result = Surah::whereHas('ayahs', function ($query) use ($request) {
+        $results = Surah::whereHas('ayahs', function ($query) use ($request) {
             return $query
                 ->join('translations AS t', 't.translatable_id', '=', 'ayahs.id')
+                ->where('t.translatable_type', 'App\Models\Ayah')
+                ->where('t.translation_version_id', 1)
                 ->whereFullText('t.text', $request->q);
         })
             ->get();
 
 
-        return SearchResource::collection($result);
+        foreach ($results as $result) {
+            $result->ayahs = $result->ayahs()
+                ->join('translations AS t', 't.translatable_id', '=', 'ayahs.id')
+                ->join('khats AS k', 'k.khatable_id', '=', 'ayahs.id')
+                ->where('t.translatable_type', 'App\Models\Ayah')
+                ->where('k.khatable_type', 'App\Models\Ayah')
+                ->where('t.translation_version_id', 1)
+                ->where('k.khat_type_id', 5)
+                ->whereFullText('t.text', $request->q)
+                ->select('t.text as text', 'ayah_number', 'surah_id', 'k.text as khat')
+                ->get()
+                ->each(function ($item) use ($request) {
+                    foreach (explode(' ', $request->q) as $word) {
+                        $word = strtolower($word);
+                        $item->text = str_replace($word, "<b style='color: #ffe282;'>{$word}</b>", $item->text);
+                        $word = ucfirst($word);
+                        $item->text = str_replace($word, "<b style='color: #ffe282;'>{$word}</b>", $item->text);
+                    }
+                });
+        }
+
+        return SearchResource::collection($results);
     }
 }

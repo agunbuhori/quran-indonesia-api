@@ -22,7 +22,7 @@ class SearchAyahRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'q' => 'required|max:255|min:4',
+            'q' => 'required|max:255|min:3',
             'translation_version_id' => 'exists:translation_versions,id'
         ];
     }

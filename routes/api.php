@@ -31,7 +31,7 @@ Route::get('/juz/{juz}', [SurahController::class, 'show_juz']);
 Route::get('/topic', [TopicController::class, 'index']);
 Route::get('/topic/{topic}', [TopicController::class, 'show']);
 Route::get('/search', [SurahController::class, 'search']);
-
+Route::get('/page/{page}', [AyahController::class, 'page']);
 Route::get('/ayah/{surah}/{ayah}', [AyahController::class, 'show']);
 Route::get('/tafseer/{surah}/{ayah}', [TafseerController::class, 'show']);
 

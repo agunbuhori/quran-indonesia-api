@@ -6,9 +6,41 @@ use App\Http\Requests\StoreAyahRequest;
 use App\Http\Requests\UpdateAyahRequest;
 use App\Http\Resources\AyahsResource;
 use App\Models\Ayah;
+use App\Models\Kalimah;
 
 class AyahController extends Controller
 {
+
+    public function page(int $page)
+    {
+        $kalimahs = Kalimah::where('page_number', $page)->select('text_v2 as text', 'line_number')->get();
+
+
+        $lines = [];
+
+        foreach (range(1, 15) as $line) {
+            $lines[$line] = [];
+        }
+
+        foreach ($kalimahs as $kalimah) {
+            $lines[$kalimah->line_number][] = $kalimah->text;
+        }
+
+
+        // foreach ($lines as $key => $line) {
+        //     if (count($line) === 0) {
+        //         if (isset($lines[$key - 1]) && $lines[$key - 1][0] === 'surah_name') {
+        //             $lines[$key] = ['bismillah'];
+        //         } else {
+        //             $lines[$key] = ['surah_name'];
+        //         }
+        //     } else {
+        //         $lines[$key] = array_reverse($lines[$key]);
+        //     }
+        // }
+
+        return $lines;
+    }
     /**
      * Display a listing of the resource.
      */

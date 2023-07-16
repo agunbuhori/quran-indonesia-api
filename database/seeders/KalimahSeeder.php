@@ -19,28 +19,25 @@ class KalimahSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::transaction(function () {
-            foreach (range(1, 114) as $surah) {
-                try {
-                    $request = Http::get("https://api.quran.com/api/v4/verses/by_chapter/$surah?language=id&words=true&page=1&per_page=300&fields=1");
+        // DB::transaction(function () {
+        foreach (range(1, 114) as $surah) {
+            try {
+                $request = Http::get("https://api.qurancdn.com/api/qdc/verses/by_chapter/$surah?words=true&translation_fields=resource_name%2Clanguage_id&per_page=300&fields=text_uthmani%2Cchapter_id%2Chizb_number%2Ctext_imlaei_simple&translations=131%2C174%2C33%2C134%2C141&reciter=7&word_translation_language=en&page=1&word_fields=verse_key%2Cverse_id%2Cpage_number%2Clocation%2Ctext_uthmani%2Ccode_v1%2Cqpc_uthmani_hafs&mushaf=2");
 
-                    foreach ($request['verses'] as $verse) {
-                        foreach ($verse['words'] as $word) {
-                            Kalimah::create([
-                                'ayah_id' => $verse['id'],
-                                'position' => $word['position'],
-                                'char_type_name' => $word['char_type_name'],
+                foreach ($request['verses'] as $verse) {
+                    foreach ($verse['words'] as $word) {
+                        Kalimah::where(['ayah_id' => $word['verse_id'], 'position' => $word['position']])
+                            ->update([
+                                'text' => $word['code_v1'],
                                 'page_number' => $word['page_number'],
-                                'line_number' => $word['line_number'],
-                                'text' => $word['text'],
-                                'text_v2' => $word['text'],
+                                'line_number' => $word['line_number']
                             ]);
-                        }
                     }
-                } catch (\Throwable $th) {
-                    throw $th;
                 }
+            } catch (\Throwable $th) {
+                throw $th;
             }
-        });
+        }
+        // });
     }
 }
